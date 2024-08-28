@@ -1,0 +1,8 @@
+/node_modules
+.zip
+.xls
+.xlsm
+.hwp
+.doc
+.env
+.env.local
