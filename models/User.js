@@ -32,7 +32,6 @@ class User extends Model {
                 // Other model options go here
                 sequelize, // DB 연결을 위한 시퀄라이즈 인스턴스
                 timestamps: false,
-                timestamp
                 modelName: 'User', // 시퀄라이즈 모델 이름
                 tableName: 'users', // 데이터베이스 테이블 이름 (기본값: 모델이름을 s | 복수형)
                 paranoid: false, // 테이블 삭제 후 복구를 원하면 true, 아니라면 false (삭제날짜를 기록)
