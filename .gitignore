@@ -6,3 +6,5 @@
 .doc
 .env
 .env.local
+.env.local.development
+.env.local.production
