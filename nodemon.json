@@ -1,0 +1,9 @@
+{
+    "ignore": [
+      "models/*",
+      "controller/*",
+      "routes/*",
+      "*.test.js", 
+      "**/fixtures/**"
+    ]
+  }
