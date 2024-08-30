@@ -3,7 +3,7 @@ import { Sequelize } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 // json 포맷을 node.js에서 불러올때는 assert {type: 'json'}을 삽입해야 한다.
-import config from "../config/config.json" assert {type: 'json'};
+import config from "../config/config.json" assert { type: "json" };
 const env = process.env.NODE_ENV || "development";
 const configEnv = config[env]; // username, database, password, host..
 
