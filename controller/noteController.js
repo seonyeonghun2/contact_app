@@ -13,7 +13,7 @@ const createMemo = async (req, res) => {
         // 일단!
         // console.log(name, phone, email, relationship);
         // 이상없으면? DB에 데이터를 삽입 .create({데이터}) 호출 ==>
-        const result = await db.User.create({
+        const result = await db.Note.create({
             name,
             phone,
             email,
@@ -33,7 +33,7 @@ const createMemo = async (req, res) => {
 
 const findAllUsers = async (req, res) => {
     try {
-        const users = await db.User.findAll();
+        const users = await db.Note.findAll();
 
         res.json({
             status: 200,
@@ -47,7 +47,7 @@ const findAllUsers = async (req, res) => {
 const findOneUser = async (req, res) => {
     console.log("======= 요청 아이디 : " + req.params.id);
     try {
-        const foundUser = await db.User.findAll({
+        const foundUser = await db.Note.findAll({
             where: {
                 id: req.params.id
             }
@@ -71,7 +71,7 @@ const findOneUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        const result = await db.User.update(
+        const result = await db.Note.update(
             { email: req.body.email }, 
             {
                 where: {
@@ -92,7 +92,7 @@ const updateUser = async (req, res) => {
 const removeUser = async (req, res) => {
     console.log("삭제요청 아이디 : " + req.params.id)
     try {
-        const removedUser = await db.User.destroy({
+        const removedUser = await db.Note.destroy({
             where: {
                 id: req.params.id
             }
@@ -110,7 +110,7 @@ const removeUser = async (req, res) => {
 
 const removeAllUsers = async (req, res) => {
     try {
-        const removedUser = await db.User.destroy({
+        const removedUser = await db.Note.destroy({
             truncate: true
         });
         res.json({
