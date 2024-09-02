@@ -7,7 +7,7 @@ import db from "../models/index.js";
 // 작명 : 동사+명사(단수,복수)
 // 비동기 통신:   callback function --> AJAX --> Promise -->  async / await (현재 최신 문법)
 // localhost:3000/add --> req.body 전달되는 각종 데이터(POST 통신)
-const createUser = async (req, res) => {
+const createMemo = async (req, res) => {
     const { name, phone, email, relationship } = req.body; // 요청 바디에서 각 필드값을 추출 (=구조분해할당 문법)
     try {
         // 일단!
@@ -123,7 +123,7 @@ const removeAllUsers = async (req, res) => {
     }
 }
 
-const userControl = {
+const noteControl = {
     createUser,
     findAllUsers,
     findOneUser,
@@ -132,4 +132,4 @@ const userControl = {
     updateUser
 }
 
-export default userControl;
+export default noteControl;

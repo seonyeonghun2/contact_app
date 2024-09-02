@@ -4,12 +4,12 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
-const app = express()
+const app = express();
 
-import userRouter from "./routes/userRouter.js";
+import contactRouter from "./routes/contactRouter.js";
 
 // middleware
 app.use(express.json()); // json 데이터를 express에서 처리 가능
-app.use("/", userRouter);
+app.use("/", contactRouter);
 
-app.listen(3000)
+app.listen(3000);
