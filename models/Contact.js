@@ -20,7 +20,8 @@ class Contact extends Model {
           // allowNull is true : default (NULL)
         },
         address: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING,
+          allowNull: true,
         },
         created_at: {
           type: DataTypes.DATE,

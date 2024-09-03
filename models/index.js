@@ -39,7 +39,7 @@ Note.init(sequelize); // Memo 모델의 컬럼, 자료형 --> MariaDB에 생성
 // Model - Table 동기화(Synchronization) ==> Promises 객체를 반환 : 비동기
 // Development 단계에서만 Sync 명령을 사용하길 권장, Production 단계에서는
 await sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     console.log(
       "============ 모델과 데이터베이스가 매핑되었습니다 ==========="

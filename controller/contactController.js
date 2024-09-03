@@ -2,28 +2,31 @@
 import db from "../models/index.js";
 
 // MVC 패턴
-
 // DB에 CRUD 하는 작업 ==> 자바스크립트 함수(=메소드) ==> 라우터에서 사용할수 있게 export
 // 작명 : 동사+명사(단수,복수)
 // 비동기 통신:   callback function --> AJAX --> Promise -->  async / await (현재 최신 문법)
 // localhost:3000/add --> req.body 전달되는 각종 데이터(POST 통신)
 const createUser = async (req, res) => {
-  const { name, phone, email, relationship } = req.body; // 요청 바디에서 각 필드값을 추출 (=구조분해할당 문법)
+  const { name, phone, email, address } = req.body; // 요청 바디에서 각 필드값을 추출 (=구조분해할당 문법)
   try {
-    // 일단!
-    // console.log(name, phone, email, relationship);
-    // 이상없으면? DB에 데이터를 삽입 .create({데이터}) 호출 ==>
     const result = await db.Contact.create({
       name,
       phone,
       email,
-      relationship,
+      address,
     });
 
-    res.json({
-      status: 201,
-      result,
-    });
+    if (!result) {
+      res.json({
+        status: 404,
+        message: "요청이 잘못되었습니다.",
+      });
+    } else {
+      res.json({
+        status: 201,
+        result,
+      });
+    }
   } catch (error) {
     console.log("Error : " + error);
   }
@@ -71,18 +74,26 @@ const findOneUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const result = await db.Contact.update(
-      { email: req.body.email },
+      { address: req.body.address },
       {
         where: {
           id: req.body.id,
         },
       }
     );
-    res.json({
-      status: 201,
-      message: "연락처가 업데이트가 되었습니다.",
-      data: result,
-    });
+    if (!result) {
+      res.json({
+        status: 400,
+        message: "업데이트가 실패했습니다.",
+        data: result,
+      });
+    } else {
+      res.json({
+        status: 201,
+        message: "연락처가 업데이트가 되었습니다.",
+        data: result,
+      });
+    }
   } catch (error) {
     console.log("에러메세지 : " + error);
   }
