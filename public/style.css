@@ -1,0 +1,35 @@
+form,
+fieldset {
+  border: 0;
+}
+legend {
+  display: none;
+}
+h1,
+h2 {
+  text-align: center;
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 20px 0;
+}
+.row input {
+  flex: auto;
+  padding: 10px 20px;
+}
+table,
+th,
+td {
+  border-collapse: collapse;
+  border: 1px solid #333;
+}
+th,
+td {
+  text-align: center;
+  padding: 10px 0;
+}
+.reg_contacts {
+  width: 96%;
+  margin: 2%;
+}
