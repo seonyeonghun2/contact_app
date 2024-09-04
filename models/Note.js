@@ -34,7 +34,7 @@ class Note extends Model {
     );
   }
   static associate(db) {
-    Note.belongsTo(db.Contact, { foreignKey: "contact_id", targetKey: "id" });
+    db.Note.belongsTo(db.Contact, { foreignKey: "contact_id", targetKey: "id" });
   }
 }
 
