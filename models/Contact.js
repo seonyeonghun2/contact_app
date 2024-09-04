@@ -43,7 +43,7 @@ class Contact extends Model {
     );
   }
   static associate(db) {
-    Contact.hasMany(db.Note, { foreignKey: "contact_id", sourceKey: "id" });
+    db.Contact.hasMany(db.Note, { foreignKey: "contact_id", sourceKey: "id" });
   }
 }
 
