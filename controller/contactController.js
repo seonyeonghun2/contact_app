@@ -6,72 +6,64 @@ import db from "../models/index.js";
 // 작명 : 동사+명사(단수,복수)
 // 비동기 통신:   callback function --> AJAX --> Promise -->  async / await (현재 최신 문법)
 // localhost:3000/add --> req.body 전달되는 각종 데이터(POST 통신)
-const createUser = async (req, res) => {
-  const { name, phone, email, address } = req.body; // 요청 바디에서 각 필드값을 추출 (=구조분해할당 문법)
+const createContact = async (req, res) => {
+  const { name, phone, email, address } = req.body;
+  if (!name || !phone) {
+    res.json({
+      status: 401,
+      message: "name,phone이 null 입니다",
+    });
+  }
   try {
-    const result = await db.Contact.create({
+    const newContact = await db.Contact.create({
       name,
       phone,
       email,
       address,
     });
 
-    if (!result) {
-      res.json({
-        status: 404,
-        message: "요청이 잘못되었습니다.",
-      });
-    } else {
-      res.json({
-        status: 201,
-        result,
-      });
-    }
+    res.json({
+      status: 200,
+      message: "success",
+    });
   } catch (error) {
-    console.log("Error : " + error);
+    console.log("에러메세지 : " + error);
   }
 };
 // removeUser, modifyUser, deleteUser + findAllUsers
 
-const findAllUsers = async (req, res) => {
+const findAllContacts = async (req, res) => {
   try {
     const users = await db.Contact.findAll();
-
-    res.json({
-      status: 200,
-      data: users,
-    });
+    res.render("contact", { contacts: users });
+    // res.json({
+    //   status: 200,
+    //   data: users,
+    // });
   } catch (error) {
     console.log("에러메세지 : " + error);
   }
 };
 
-const findOneUser = async (req, res) => {
+const findOneContact = async (req, res) => {
   console.log("======= 요청 아이디 : " + req.params.id);
   try {
-    const foundUser = await db.Contact.findAll({
+    const foundContact = await db.Contact.findAll({
       where: {
         id: req.params.id,
       },
+      include: {
+        model: db.Note,
+      },
     });
 
-    if (!foundUser) {
-      res.json({
-        status: 500,
-        message: "사용자 정보를 찾을 수 없습니다",
-      });
-    } else {
-      res.json({
-        status: 201,
-        data: foundUser,
-      });
-    }
+    res.render("contact", { contacts: foundContact });
   } catch (err) {
-    console.log("에러메세지 : " + error);
+    console.log("에러메세지 : " + err);
   }
 };
 
-const updateUser = async (req, res) => {
+const updateContact = async (req, res) => {
   try {
     const result = await db.Contact.update(
       { address: req.body.address },
@@ -99,7 +91,7 @@ const updateUser = async (req, res) => {
   }
 };
 
-const removeUser = async (req, res) => {
+const removeContact = async (req, res) => {
   console.log("삭제요청 아이디 : " + req.params.id);
   try {
     const removedUser = await db.Contact.destroy({
@@ -107,17 +99,23 @@ const removeUser = async (req, res) => {
         id: req.params.id,
       },
     });
-    res.json({
-      status: 201,
-      message: "선택하신 연락처가 삭제되었습니다.",
-      data: removedUser,
-    });
+    if (!removedUser) {
+      res.json({
+        status: 400,
+        message: "업데이트가 삭제됩니다.",
+      });
+    } else {
+      res.json({
+        status: 201,
+        message: "업데이트가 삭제됩니다.",
+      });
+    }
   } catch (error) {
     console.log("에러메세지 : " + error);
   }
 };
 
-const removeAllUsers = async (req, res) => {
+const removeAllContacts = async (req, res) => {
   try {
     const removedUser = await db.Contact.destroy({
       truncate: true,
@@ -132,12 +130,12 @@ const removeAllUsers = async (req, res) => {
 };
 
 const contactControl = {
-  createUser,
-  findAllUsers,
-  findOneUser,
-  removeUser,
-  removeAllUsers,
-  updateUser,
+  createContact,
+  findAllContacts,
+  findOneContact,
+  removeContact,
+  removeAllContacts,
+  updateContact,
 };
 
 export default contactControl;
