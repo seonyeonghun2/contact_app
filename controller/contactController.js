@@ -66,10 +66,15 @@ const findOneContact = async (req, res) => {
 const updateContact = async (req, res) => {
   try {
     const result = await db.Contact.update(
-      { address: req.body.address },
+      {
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
+        address: req.body.address,
+      },
       {
         where: {
-          id: req.body.id,
+          id: req.params.id,
         },
       }
     )
@@ -77,14 +82,10 @@ const updateContact = async (req, res) => {
       res.json({
         status: 400,
         message: '업데이트가 실패했습니다.',
-        data: result,
       })
     } else {
-      res.json({
-        status: 201,
-        message: '연락처가 업데이트가 되었습니다.',
-        data: result,
-      })
+      const users = await db.Contact.findAll()
+      res.render('contact', { contacts: users })
     }
   } catch (error) {
     console.log('에러메세지 : ' + error)
