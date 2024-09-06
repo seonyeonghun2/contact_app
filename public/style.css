@@ -29,7 +29,9 @@ td {
   text-align: center;
   padding: 10px 0;
 }
-
+section > form {
+  flex: 1;
+}
 /* modal layer */
 .hide {
   display: none;

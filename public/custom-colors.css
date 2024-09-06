@@ -1,0 +1,17 @@
+/* Custom 버튼 컬러 : 빨강 */
+button.red,
+input[type='submit'].red,
+input[type='reset'].red,
+input[type='button'].red,
+[role='button'].red {
+  background-color: #f44336;
+  border-color: #da190b;
+}
+
+button.red:hover,
+input[type='submit'].red:hover,
+input[type='reset'].red:hover,
+input[type='button'].red:hover,
+[role='button'].red:hover {
+  background-color: #da190b;
+}
