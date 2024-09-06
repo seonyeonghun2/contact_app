@@ -2,21 +2,18 @@ import { Sequelize } from "sequelize";
 // 이미 생성되어있는 기본 코드는 모두 삭제!
 import dotenv from "dotenv";
 dotenv.config();
-// json 포맷을 node.js에서 불러올때는 assert {type: 'json'}을 삽입해야 한다.
-import config from "../config/config.json" assert { type: "json" };
 const env = process.env.NODE_ENV || "development";
-const configEnv = config[env]; // username, database, password, host..
 
 import Contact from "./Contact.js"; // Contact 모델 불러오기
 import Note from "./Note.js"; // Note 모델 불러오기
 
 const sequelize = new Sequelize(
-  configEnv.database,
-  configEnv.username,
-  configEnv.password,
+  process.env.NODE_DB_NAME,
+  process.env.NODE_DB_USER,
+  process.env.NODE_DB_PASS,
   {
-    host: configEnv.host,
-    dialect: configEnv.dialect,
+    host: process.env.NODE_DB_HOST,
+    dialect: process.env.NODE_DB_TYPE,
     port: 3306,
     logging: (msg) => console.log(msg),
   }
