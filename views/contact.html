@@ -18,108 +18,110 @@
       <h1>Contact APP</h1>
       <h2>연락처 등록</h2>
     </header>
-    <section>
-      <form id="contact_form">
-        <fieldset class="contact">
-          <legend>연락처</legend>
-          <div class="container">
-            <div class="row">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="이름"
-                required
-                value="오나라"
-              />
+    <main class="d-flex gap-1 justify-space-between">
+      <section>
+        <form id="contact_form">
+          <fieldset class="contact">
+            <legend>연락처</legend>
+            <div class="container">
+              <div class="row">
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="이름"
+                  required
+                  value="오나라"
+                />
+              </div>
+              <div class="row">
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="연락처"
+                  required
+                  value="01012345678"
+                />
+              </div>
+              <div class="row">
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="이메일"
+                  value="nara@oh.co.kr"
+                />
+              </div>
+              <div class="row">
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  placeholder="주소"
+                  value="광주광역시 서구"
+                />
+              </div>
+              <div>
+                <button type="submit">등록</button>
+                <button type="reset">취소</button>
+              </div>
             </div>
-            <div class="row">
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="연락처"
-                required
-                value="01012345678"
-              />
-            </div>
-            <div class="row">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="이메일"
-                value="nara@oh.co.kr"
-              />
-            </div>
-            <div class="row">
-              <input
-                type="text"
-                id="address"
-                name="address"
-                placeholder="주소"
-                value="광주광역시 서구"
-              />
-            </div>
-            <div>
-              <button type="submit">등록</button>
-              <button type="reset">취소</button>
-            </div>
+          </fieldset>
+        </form>
+      </section>
+      <section>
+        <div id="contact_list">
+          <h2>연락처 목록</h2>
+          <div class="table_top">
+            <button type="button" class="clear_btn">모두 삭제</button>
           </div>
-        </fieldset>
-      </form>
-    </section>
-    <section>
-      <div id="contact_list">
-        <h2>연락처 목록</h2>
-        <div class="table_top">
-          <button type="button" class="clear_btn">모두 삭제</button>
+          <table class="reg_contacts">
+            <thead>
+              <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>연락처</th>
+                <th>주소</th>
+                <th>관리</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for contact in contacts %}
+              <tr>
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.name }}</td>
+                <td>{{ contact.phone }}</td>
+                <td>{{ contact.address }}</td>
+                <td>
+                  <button
+                    type="button"
+                    id="modify"
+                    class="modify_btn"
+                    data-id="{{ contact.id }}"
+                    data-name="{{ contact.name}}"
+                    data-phone="{{ contact.phone }}"
+                    data-email="{{ contact.email }}"
+                    data-address="{{ contact.address }}"
+                  >
+                    수정
+                  </button>
+                  <button
+                    type="button"
+                    id="delete"
+                    class="delete_btn red"
+                    data-contact-num="{{ contact.id }}"
+                  >
+                    삭제
+                  </button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-        <table class="reg_contacts">
-          <thead>
-            <tr>
-              <th>번호</th>
-              <th>이름</th>
-              <th>연락처</th>
-              <th>주소</th>
-              <th>관리</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for contact in contacts %}
-            <tr>
-              <td>{{ contact.id }}</td>
-              <td>{{ contact.name }}</td>
-              <td>{{ contact.phone }}</td>
-              <td>{{ contact.address }}</td>
-              <td>
-                <button
-                  type="button"
-                  id="modify"
-                  class="modify_btn"
-                  data-id="{{ contact.id }}"
-                  data-name="{{ contact.name}}"
-                  data-phone="{{ contact.phone }}"
-                  data-email="{{ contact.email }}"
-                  data-address="{{ contact.address }}"
-                >
-                  수정
-                </button>
-                <button
-                  type="button"
-                  id="delete"
-                  class="delete_btn red"
-                  data-contact-num="{{ contact.id }}"
-                >
-                  삭제
-                </button>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </section>
+      </section>
+    </main>
   </body>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="../static/contact.js"></script>
