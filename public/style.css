@@ -29,3 +29,33 @@ td {
   text-align: center;
   padding: 10px 0;
 }
+
+/* modal layer */
+.hide {
+  display: none;
+}
+
+#modal {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+#modal form {
+  box-shadow: none;
+}
+#modal .container {
+  position: absolute;
+  z-index: 1000;
+  background: white;
+  padding: 50px;
+  width: 600px;
+  left: 50%;
+  top: 50%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%);
+}

@@ -63,45 +63,45 @@
           </div>
         </div>
       </fieldset>
-      <h2>연락처 목록</h2>
-      <div id="contact_list">
-        <div class="table_top">
-          <button type="button" class="clear_btn">모두 삭제</button>
-        </div>
-        <table class="reg_contacts">
-          <thead>
-            <tr>
-              <th>번호</th>
-              <th>이름</th>
-              <th>연락처</th>
-              <th>주소</th>
-              <th>관리</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for contact in contacts %}
-            <tr>
-              <td>{{ contact.id }}</td>
-              <td>{{ contact.name }}</td>
-              <td>{{ contact.phone }}</td>
-              <td>{{ contact.address }}</td>
-              <td>
-                <button type="button" id="modify" class="modify">수정</button>
-                <button
-                  type="button"
-                  id="delete"
-                  class="delete_btn"
-                  data-contact-num="{{ contact.id }}"
-                >
-                  삭제
-                </button>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
     </form>
+    <h2>연락처 목록</h2>
+    <div id="contact_list">
+      <div class="table_top">
+        <button type="button" class="clear_btn">모두 삭제</button>
+      </div>
+      <table class="reg_contacts">
+        <thead>
+          <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>연락처</th>
+            <th>주소</th>
+            <th>관리</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for contact in contacts %}
+          <tr>
+            <td>{{ contact.id }}</td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>{{ contact.address }}</td>
+            <td>
+              <button type="button" id="modify" class="modify">수정</button>
+              <button
+                type="button"
+                id="delete"
+                class="delete_btn"
+                data-contact-num="{{ contact.id }}"
+              >
+                삭제
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </body>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="../static/contact.js"></script>
