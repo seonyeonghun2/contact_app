@@ -87,7 +87,18 @@
             <td>{{ contact.phone }}</td>
             <td>{{ contact.address }}</td>
             <td>
-              <button type="button" id="modify" class="modify">수정</button>
+              <button
+                type="button"
+                id="modify"
+                class="modify_btn"
+                data-id="{{ contact.id }}"
+                data-name="{{ contact.name}}"
+                data-phone="{{ contact.phone }}"
+                data-email="{{ contact.email }}"
+                data-address="{{ contact.address }}"
+              >
+                수정
+              </button>
               <button
                 type="button"
                 id="delete"
