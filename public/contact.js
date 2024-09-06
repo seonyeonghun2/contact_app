@@ -34,7 +34,6 @@ window.addEventListener('DOMContentLoaded', () => {
       //location.reload()
     })
   })
-
   const clearBtn = document.querySelector('.clear_btn')
   clearBtn.addEventListener('click', async (e) => {
     let user_confirm = confirm('모두 삭제 하시겠습니까?')
@@ -52,4 +51,114 @@ window.addEventListener('DOMContentLoaded', () => {
         })
     }
   })
-})
+
+  const modifyBtns = document.querySelectorAll('.modify_btn')
+  modifyBtns.forEach((modifyBtn) => {
+    modifyBtn.addEventListener('click', (e) => {
+      const id = e.target.dataset.id
+      const name = e.target.dataset.name
+      const phone = e.target.dataset.phone
+      const email = e.target.dataset.email
+      const address = e.target.dataset.address
+      // console.log(id, name, phone, email, address)
+      createModal(id, name, phone, email, address)
+    })
+  })
+
+  function createModal(id, name, phone, email, address) {
+    const modalDiv = document.createElement('div')
+    modalDiv.id = 'modal'
+    modalDiv.innerHTML = `
+    <div id="modal">
+      <form id="update_form">
+        <fieldset>
+          <legend>연락처 수정</legend>
+          <div class="container">
+            <div class="row">
+              <input
+                type="text"
+                id="update_name"
+                name="name"
+                placeholder="이름"
+                required
+                value="${name}"
+              />
+            </div>
+            <div class="row">
+              <input
+                type="tel"
+                id="update_phone"
+                name="phone"
+                placeholder="연락처"
+                required
+                value="${phone}"
+              />
+            </div>
+            <div class="row">
+              <input
+                type="email"
+                id="update_email"
+                name="email"
+                placeholder="이메일"
+                value="${email}"
+              />
+            </div>
+            <div class="row">
+              <input
+                type="text"
+                id="update_address"
+                name="address"
+                placeholder="주소"
+                value="${address}"
+              />
+            </div>
+            <div>
+              <button type="submit" id="update_form">완료</button>
+              <button type="reset" id="cancel">취소</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    `
+    document.body.appendChild(modalDiv)
+
+    // 모달 취소 버튼 이벤트
+    modalDiv.querySelector('#cancel').addEventListener('click', () => {
+      document.body.removeChild(modalDiv)
+    })
+
+    // 모달 제출 이벤트
+    modalDiv
+      .querySelector('#update_form')
+      .addEventListener('submit', function (e) {
+        e.preventDefault()
+        updateContact(id)
+      })
+  }
+
+  function updateContact(id) {
+    const modalDiv = document.querySelector('#modal')
+    if (!modalDiv) {
+      console.error('모달을 찾을 수 없습니다.')
+      return
+    }
+    fetch(`http://localhost:3001/api/contact/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        name: modalDiv.querySelector('#update_name').value,
+        phone: modalDiv.querySelector('#update_phone').value,
+        email: modalDiv.querySelector('#update_email').value,
+        address: modalDiv.querySelector('#update_address').value,
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((res) => location.reload())
+      .catch((err) => {
+        console.log(err)
+        // document.body.removeChild(document.querySelector('#modal'))
+      })
+  }
+}) // DOMContentLoaded
