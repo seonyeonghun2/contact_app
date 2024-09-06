@@ -4,8 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact APP - 연락처 앱</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="shortcut icon" href="../static/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+    <link rel="stylesheet" href="../static/style.css" />
+    <link
+      rel="shortcut icon"
+      href="../static/favicon.png"
+      type="image/x-icon"
+    />
+  </head>
   <body>
     <h1>Contact APP</h1>
     <h2>연락처 등록</h2>
@@ -34,10 +40,22 @@
             />
           </div>
           <div class="row">
-            <input type="email" id="email" name="email" placeholder="이메일" value="nara@oh.co.kr"/>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="이메일"
+              value="nara@oh.co.kr"
+            />
           </div>
           <div class="row">
-            <input type="text" id="address" name="address" placeholder="주소" value="광주광역시 서구"/>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              placeholder="주소"
+              value="광주광역시 서구"
+            />
           </div>
           <div>
             <button type="submit">등록</button>
@@ -47,6 +65,9 @@
       </fieldset>
       <h2>연락처 목록</h2>
       <div id="contact_list">
+        <div class="table_top">
+          <button type="button" class="clear_btn">모두 삭제</button>
+        </div>
         <table class="reg_contacts">
           <thead>
             <tr>
@@ -66,7 +87,14 @@
               <td>{{ contact.address }}</td>
               <td>
                 <button type="button" id="modify" class="modify">수정</button>
-                <button type="button" id="delete" class="delete_btn" data-contact-num="{{ contact.id }}">삭제</button>
+                <button
+                  type="button"
+                  id="delete"
+                  class="delete_btn"
+                  data-contact-num="{{ contact.id }}"
+                >
+                  삭제
+                </button>
               </td>
             </tr>
             {% endfor %}
