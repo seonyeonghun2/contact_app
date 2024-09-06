@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
       .then((res) => {
         // console.log(res)
         if (res.status === 200) {
-          location.reload();
+          location.reload()
         }
       })
       .catch((error) => {
@@ -33,5 +33,23 @@ window.addEventListener('DOMContentLoaded', () => {
         })
       //location.reload()
     })
+  })
+
+  const clearBtn = document.querySelector('.clear_btn')
+  clearBtn.addEventListener('click', async (e) => {
+    let user_confirm = confirm('모두 삭제 하시겠습니까?')
+    if (user_confirm) {
+      await fetch('http://localhost:3001/api/contacts', {
+        method: 'DELETE',
+      })
+        .then((res) => {
+          alert('모두 삭제 성공!')
+          location.reload()
+        })
+        .catch((err) => {
+          alert('모두 삭제 실패!')
+          console.log(err)
+        })
+    }
   })
 })
